@@ -2,16 +2,17 @@ function onSignIn(googleUser) {
   const google_token = googleUser.getAuthResponse().id_token;
   $.ajax({
     method: 'POST',
-    url: 'http://localhost:3000/user/google-signin',
+    url: 'http://localhost:3000/user/googlesignin',
     data: {
       google_token
     }
   })
-  .done(data => {
+  .done(dataToken => {
+    console.log(dataToken)
     $('#wheather2').hide();
     $('.navbar').show();
-    $('#wheather1').show();
-    localStorage.setItem('access_token', data.access_token)
+    $('#wheather').show();
+    localStorage.setItem('access_token', dataToken.access_token)
     $.ajax({
       url: "http://localhost:3000/api/current/jakarta",//straigh from github
       method: "get"
@@ -59,6 +60,9 @@ function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
+    $('#wheather2').show();
+    $('.navbar').hide();
+    $('#wheather').hide();
   });
 }
 
