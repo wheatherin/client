@@ -10,26 +10,79 @@
 
     <meta name="google-signin-client_id" content="341250394849-sr319eaqpsmtt69lg464abdcbtog6iqd.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title>Hello, world!</title>
+    <link rel="shortcut icon" type="image/png" href="https://png.pngtree.com/png-vector/20190417/ourlarge/pngtree-cute-smile-sun-vector-png-image_948712.jpg" />
+    <title>Wheatherin</title>
     <style>
       #wheather{
-        background-color: burlywood;
+        background-color: antiquewhite;
         border-radius: 5px;
+        padding: 4rem;
       }
+      .container {
+        margin-top: 5%;
+      }
+
+      .card-img-top {
+        max-width: 300px;
+      }
+
+      .btn-dark {
+        margin: 0.3rem;
+        font-size: 0.7rem;
+      }
+
+      .company-name {
+        color: goldenrod;
+      }
+
     </style>
   </head>
   <body>
-    <h1>Hello, world!</h1>
+    <main>
+      <div class="container shadow mb-3 rounded" id="wheather">
+        <div class="row align-middle">
+          <div class="col-8 weather-box" align='center'>
+            <div class="card shadow p-3 bg-white rounded">
+              <img src="https://png.pngtree.com/png-vector/20190417/ourlarge/pngtree-cute-smile-sun-vector-png-image_948712.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Welcome to Wheatherin</h5>
+                <p class="card-text">We help you forecast the weather</p>
+                <!-- <a href="#" class="card-link">UV Index</a>
+                <a href="#" class="card-link">Humidity</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-4 google-login text-center">
+            <div class="card shadow p-3 mb-4 bg-white rounded">
+              <div class="card-body">
+                <h5 class="card-title">Sign in with google</h5>
+                <p class="card-text">You can add more cities if you sign in with google.</p>
+                <div class="g-signin2 btn" data-onsuccess="onSignIn"></div>
+              </div>
+            </div>
 
-    <div class="container" id="wheather">
-      <h1>My First Bootstrap Page</h1>
-      <p>This is some text.</p>
-    </div>
+            <div class="card shadow p-3 bg-white rounded">
+              <div class="card-body">
+                <h5 class="card-title">Supported by</h5>
+                <p class="card-text">List of our API's partner</p>
+                <a href="#" class="btn btn-dark">Dark Sky</a>
+                <a href="#" class="btn btn-dark">Open Weather</a>
+                <a href="#" class="btn btn-dark">Weather Bit</a>
+                <a href="#" class="btn btn-dark">Location IQ</a>
+              </div>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
  
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
