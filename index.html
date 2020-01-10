@@ -131,33 +131,78 @@
     <main>
       <div class="container shadow mb-3 rounded" id="wheather2">
         <div class="row align-middle">
+
           <div class="col-8 weather-box" align='center'>
-            <div class="card card-i shadow p-3 bg-white rounded">
+            <div class="card card-i shadow p-3 bg-white rounded mb-4">
               <img src="https://cdn3.iconfinder.com/data/icons/luchesa-vol-9/128/Weather-512.png" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">Welcome to Wheatherin</h5>
                 <p class="card-text">We help you forecast the weather so you can forget about your raincoat</p>
               </div>
             </div>
-          </div>
-          <div class="col-4 google-login text-center">
-            <div class="card card-i shadow p-3 mb-4 bg-white rounded">
-              <div class="card-body">
-                <h5 class="card-title">Sign in with google</h5>
-                <p class="card-text">You can add more cities if you sign in with google.</p>
-                <div class="g-signin2 btn" id="gsignin" data-onsuccess="onSignIn"></div>
-              </div>
-            </div>
 
             <div class="card card-i shadow p-3 bg-white rounded">
               <div class="card-body">
                 <h5 class="card-title">Supported by</h5>
-                <a href="#" class="btn btn-dark">Dark Sky</a>
-                <a href="#" class="btn btn-dark">Open Weather</a>
-                <a href="#" class="btn btn-dark">Weather Bit</a>
-                <a href="#" class="btn btn-dark">Location IQ</a>
+                <a href="https://darksky.net/dev" class="btn btn-dark" target="_blank">Dark Sky</a>
+                <a href="https://openweathermap.org/api" class="btn btn-dark" target="_blank">Open Weather</a>
+                <a href="https://www.weatherbit.io/api" class="btn btn-dark" target="_blank">Weather Bit</a>
+                <a href="https://locationiq.com/docs" class="btn btn-dark" target="_blank">Location IQ</a>
               </div>
             </div>
+          </div>
+
+          <div class="col-4 google-login text-center" id="google-regis">
+            <div class="card card-i shadow p-3 mb-4 bg-white rounded">
+              <div class="card-body">
+                <h5 class="card-title">Sign in with google</h5>
+                <p class="card-text">You can add more cities if you sign in with google.</p>
+                <div class="g-signin2 btn" data-onsuccess="onSignIn"></div>
+              </div>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+              Register success!
+            </div>
+            <div class="card card-i shadow p-3 mb-2 bg-white rounded regis-card">
+              <div class="card-body">
+                <h5 class="card-title">Register</h5>
+                <p class="card-text">We hope we could help you predict the future.</p>
+                <form id="regis-form" method="POST" action="./assets/js/main.js">
+                  <div class="form-group">
+                    <label for="InputEmail">Email address</label>
+                    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="InputPassword">Password</label>
+                    <input type="password" class="form-control" id="InputPassword">
+                  </div>
+                  <button id="register-btn" type="submit" class="btn btn-primary">Register</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="card card-i shadow p-3 mb-2 bg-white rounded login-card">
+              <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <form>
+                  <div class="form-group">
+                    <label for="InputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="InputPassword">Password</label>
+                    <input type="password" class="form-control" id="InputPassword">
+                  </div>
+                  <button id="register-btn" type="submit" class="btn btn-primary">Login</button>
+                </form>
+              </div>
+            </div>
+
+            
+
           </div>
         </div>
       </div>

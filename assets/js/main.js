@@ -31,7 +31,7 @@ function onSignIn(googleUser) {
       $('.navbar').show();
       $('#wheather').show();
       localStorage.setItem('access_token', dataToken.access_token)
-      console.log(dataToken.name, '=======')
+      console.log(dataToken, '=======')
 
       $('#ForUser').append(`
     <a> ${dataToken.name}</a>
@@ -191,6 +191,54 @@ $(document).ready(function () {
 
   $('a').click(function (event) {
     event.preventDefault()
+  })
+
+  $('.alert-info').hide();
+  $('.login-card').hide();
+
+  $('#regis-form').submit((event) => {
+    event.preventDefault();
+    const email = $('#InputEmail').val();
+    const password = $('#InputPassword').val();
+    console.log(email, password);
+
+    $.ajax({
+      method: 'POST',
+      url: 'localhost://3000/user/register',
+      data: {
+        email,
+        password
+      }
+    })
+    .done(data => {
+      console.log(data);
+      $('regis-card').hide();
+      $('.alert-info').show();
+      $('.login-card').show();
+    })
+    .fail(err => {
+      console.log(err);
+    })
+  });
+
+  $('#login-form').submit(event => {
+    event.preventDefault();
+    const email = $('#InputEmail').val();
+    const password = $('#InputPassword').val();
+    $.ajax({
+      method: 'GET',
+      url: 'localhost://3000/user/login',
+      data: {
+        email,
+        password
+      }
+    })
+    .done(data => {
+      console.log(data);
+    })
+    .fail(err => {
+      console.log(err);
+    })
   })
 
 })
