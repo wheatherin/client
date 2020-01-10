@@ -1,4 +1,22 @@
+function hidenav() {
+  var x = document.getElementById("first");
+  var y = document.getElementById("wheather");
+
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    y.style.display = "block";
+
+  } else {
+    x.style.display = "none";
+    y.style.display = "none";
+
+  }
+}   
+
+
+
 function onSignIn(googleUser) {
+
   const google_token = googleUser.getAuthResponse().id_token;
   $.ajax({
     method: 'POST',
@@ -13,6 +31,9 @@ function onSignIn(googleUser) {
     $('.navbar').show();
     $('#wheather').show();
     localStorage.setItem('access_token', dataToken.access_token)
+
+    $('#wheather').empty()
+
     $.ajax({
       url: "http://localhost:3000/api/current/jakarta",//straigh from github
       method: "get"
@@ -20,14 +41,21 @@ function onSignIn(googleUser) {
     .done( data =>{
       let today = data.currentResults
       let url = ""
-      if(today.icon == "rain"){
+      if(today.weather === "rain"){
+        url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png"
+      }else{
         url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
       }
       $('.today').append(`
       <h1>${today.city}</h1>
                 <img src="${url}" id="mainW" alt="">
                 <h2>${today.weather}</h2>
-                <h5>${today.description}</h5>
+                <h5 class="card-subtitle mb-2 text-muted">${today.description}</h5>
+                <h6>Temprature ${today.temp}</h6>
+                <h6>Wind ${today.wind_speed}</h6>
+                <a href="#" class="card-link">UV index ${today.uv}</a>
+                <a href="#" class="card-link">Humidity ${today.humidity}</a>
+
   
       `)
   
@@ -37,8 +65,8 @@ function onSignIn(googleUser) {
         $('#feed').append(`
         <div class="card card-h" style="width: 18rem; border-radius: 10px;">
         <div class="card-body">
-          <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png" alt="">
-          <h5 class="card-title">${val.date}</h5>
+          <img src="${url}" alt="">
+          <h5 class="card-title" style="color: black;">${val.date}</h5>
           <h6 class="card-subtitle mb-2 text-muted">${val.weather}</h6>
           <a href="#" class="card-link">UV index ${val.uvIndex}</a>
           <a href="#" class="card-link">Humidity ${val.humidity}</a>
@@ -52,9 +80,89 @@ function onSignIn(googleUser) {
     })
     })
   .fail(err => {
-    console.log(err);
+    console.log(err), 'google sign in';
   })
 }
+
+$('#kota').on('click', 'button', function(event) {
+  // console.log( event.currentTarget.id);
+
+  $.ajax({
+      url: `http://localhost:3000/api/current/${event.currentTarget.id}`,
+      method: "get"
+  })
+  .done( data =>{
+    
+    let today = data.currentResults
+    let week = data.weeklyResults
+
+    let url = ""
+    if(today.weather === "rain"){
+      url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png"
+    }else if(today.weather === "clouds"){
+      url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png"
+    }else{
+      url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
+    }
+
+    $('#cities').empty()
+
+
+    $('#cities').append(`
+    <div class="container" style="background-color: #fff; border-radius: 10px; margin-bottom: 60px;" id="weather">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="today" align="center">
+          
+            <!-- weather today -->
+           <h1 style="margin-top:8px;">${today.city}</h1>
+              <img src="${url}" id="mainW" alt="">
+              <h2>${today.weather}</h2>
+              <h5 class="card-subtitle mb-2 text-muted">${today.description}</h5>
+              <h6>Temprature ${today.temp}</h6>
+              <h6>Wind ${today.wind_speed}</h6>
+              <a href="#" class="card-link">UV index ${today.uv}</a>
+              <a href="#" class="card-link">Humidity ${today.humidity}</a>
+          </div>
+
+        </div>
+        <div class="col" id="${today.city}" style="height: 40rem;
+        overflow: scroll;" align="center">
+          <h2></h2>
+
+         
+
+        </div>
+      </div>
+    </div>
+
+    `)
+
+    $.each(week, function(index, val){
+      $(`#${today.city}`).append(`
+      <div class="card card-h" style="width: 18rem; border-radius: 10px;">
+      <div class="card-body">
+        <img src="${url}" alt="">
+        <h5 class="card-title" style="color: black;">${val.date}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">${val.weather}</h6>
+        <a href="#" class="card-link">UV index ${val.uvIndex}</a>
+        <a href="#" class="card-link">Humidity ${val.humidity}</a>
+      </div>
+    </div>
+      `)
+    })
+
+    
+    
+  
+  })
+  .fail(err =>{
+      console.log(err)
+  })
+
+});
+
 
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
@@ -63,6 +171,8 @@ function signOut() {
     $('#wheather2').show();
     $('.navbar').hide();
     $('#wheather').hide();
+    $('#cities').empty()
+
   });
 }
 
@@ -70,6 +180,8 @@ function signOut() {
 
 $(document).ready(function() {
 
-
+  $('a').click(function(event){
+    event.preventDefault()
+  })
 
 })

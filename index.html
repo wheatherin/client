@@ -24,6 +24,7 @@
       padding: 10px;
       margin-top: 50px;
       margin-bottom: 50px;
+      /* display: none; */
     }
 
     #wheather2 {
@@ -91,7 +92,7 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light" id="first" style="display: none;">
       <a class="navbar-brand" href="#">
         <img src="https://cdn3.iconfinder.com/data/icons/luchesa-vol-9/128/Weather-512.png" width="30" height="30"
           class="d-inline-block align-top" alt="">
@@ -99,11 +100,11 @@
       </a>
     
       <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-secondary dropdown-toggle"  type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Add City
         </button>
         
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
+        <div class="dropdown-menu" id="kota"  aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
             <!-- <a class="dropdown-item" href="#">Action</a> -->
             <button type="button" class="dropdown-item btn btn-info" id="jakarta">jakarta</button>
             <button type="button" class="dropdown-item btn btn-info" id="bandung">bandung</button>
@@ -144,7 +145,7 @@
               <div class="card-body">
                 <h5 class="card-title">Sign in with google</h5>
                 <p class="card-text">You can add more cities if you sign in with google.</p>
-                <div class="g-signin2 btn" data-onsuccess="onSignIn"></div>
+                <div class="g-signin2 btn" id="gsignin" data-onsuccess="onSignIn"></div>
               </div>
             </div>
 
@@ -163,12 +164,13 @@
     </main>
 
     <!-- Haekal content -->
-    <div class="container" id="wheather">
+    <div class="container"  id="wheather" style="display: none;">
       <div class="container">
         <div class="row">
           <div class="col">
             <div class="today" align="center">
-             
+             <!-- weather today -->
+
             </div>
   
           </div>
@@ -189,11 +191,15 @@
                 <a href="#" class="card-link">Humidity</a>
               </div>
             </div> -->
-  
+
+            
+
           </div>
         </div>
       </div>
     </div>
+
+    <div id="cities"></div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
