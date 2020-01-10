@@ -11,16 +11,12 @@ function onSignIn(googleUser) {
     $('#wheather2').hide();
     $('.navbar').show();
     $('#wheather1').show();
-    // localStorage.setItem('access_token', data.access_token)
-    // $() tembak yang mau di hide
+    localStorage.setItem('access_token', data.access_token)
     $.ajax({
       url: "http://localhost:3000/api/current/jakarta",//straigh from github
       method: "get"
   })
-  .done( data =>{
-      
-      console.log(data,'==============')
-  
+    .done( data =>{
       let today = data.currentResults
       let url = ""
       if(today.icon == "rain"){
@@ -48,15 +44,12 @@ function onSignIn(googleUser) {
         </div>
       </div>
         `)
-  
       })
-  
-  })
-  .fail (err =>{
-      console.log(err)
-  })
-
-  })
+    })
+    .fail (err =>{
+        console.log(err)
+    })
+    })
   .fail(err => {
     console.log(err);
   })
