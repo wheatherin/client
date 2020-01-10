@@ -1,24 +1,23 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    <!-- Bootstrap CSS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <meta name="google-signin-client_id"
-    content="341250394849-sr319eaqpsmtt69lg464abdcbtog6iqd.apps.googleusercontent.com">
-  <title>Hello, world!</title>
-  <style>
-    #wheather {
+    <meta name="google-signin-client_id" content="341250394849-sr319eaqpsmtt69lg464abdcbtog6iqd.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="shortcut icon" type="image/png" href="https://cdn3.iconfinder.com/data/icons/luchesa-vol-9/128/Weather-512.png" />
+    <title>Wheatherin</title>
+    <style>
+      #wheather {
       background-color: #fff;
       border-radius: 10px;
       padding: 10px;
@@ -26,7 +25,13 @@
       margin-bottom: 50px;
     }
 
-
+    #wheather2 {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
 
     #feed {
       /* background: #4CAF50; */
@@ -38,11 +43,11 @@
       /* border: 1px solid #ccc; */
     }
 
-    .card {
+    .card-h{
       margin-top: 0.5rem;
     }
 
-    .card img {
+    .card-h img {
       width: 100px;
       height: 100px;
     }
@@ -118,7 +123,7 @@
   </nav>
   <h1></h1>
 
-  <div class="container" id="wheather">
+  <div class="container" id="wheather" >
     <div class="container">
       <div class="row">
         <div class="col">
@@ -129,79 +134,157 @@
             <h5>with a chance of meatballs</h5>
           </div>
 
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light" hidden>
+      <a class="navbar-brand" href="#">
+        <img src="https://cdn3.iconfinder.com/data/icons/luchesa-vol-9/128/Weather-512.png" width="30" height="30"
+          class="d-inline-block align-top" alt="">
+        WheatherinWithYou
+      </a>
+    
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Add City
+        </button>
+        
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
+            <!-- <a class="dropdown-item" href="#">Action</a> -->
+            <button type="button" class="dropdown-item btn btn-info" id="jakarta">jakarta</button>
+            <button type="button" class="dropdown-item btn btn-info" id="bandung">bandung</button>
+            <button type="button" class="dropdown-item btn btn-info" id="surabaya">surabaya</button>
+            <button type="button" class="dropdown-item btn btn-info" id="semarang">semarang</button>
+            <button type="button" class="dropdown-item btn btn-info" id="malang">malang</button>
+          </div>
         </div>
-        <div class="col" id="feed" align="center">
-          <h2></h2>
+      </div>
+      <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="#" width="30" height="30" class="d-inline-block align-top" alt="">
+            user
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="margin-right: 2rem;">
+                <!-- <a class="dropdown-item" href="#">Action</a> -->
+                <a href="#" onclick="signOut();">Sign out</a>
+              </div>
+  
+      </div>
+    </nav>
 
-          <div class="card" style="width: 18rem; border-radius: 10px;">
-            <div class="card-body">
-              <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png" alt="">
-              <h5 class="card-title">Monday</h5>
-              <h6 class="card-subtitle mb-2 text-muted">hard rain</h6>
-              <a href="#" class="card-link">UV index</a>
-              <a href="#" class="card-link">Humidity</a>
+    <!-- Ivan page -->
+    <main hidden>
+      <div class="container shadow mb-3 rounded" id="wheather2">
+        <div class="row align-middle">
+          <div class="col-8 weather-box" align='center'>
+            <div class="card card-i shadow p-3 bg-white rounded">
+              <img src="https://cdn3.iconfinder.com/data/icons/luchesa-vol-9/128/Weather-512.png" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Welcome to Wheatherin</h5>
+                <p class="card-text">We help you forecast the weather</p>
+              </div>
             </div>
           </div>
+          <div class="col-4 google-login text-center">
+            <div class="card card-i shadow p-3 mb-4 bg-white rounded">
+              <div class="card-body">
+                <h5 class="card-title">Sign in with google</h5>
+                <p class="card-text">You can add more cities if you sign in with google.</p>
+                <div class="g-signin2 btn" data-onsuccess="onSignIn"></div>
+              </div>
+            </div>
 
-
-
-          <div class="card" style="width: 18rem; border-radius: 10px;">
-            <div class="card-body">
-              <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather14-512.png" alt="">
-              <h5 class="card-title">Tuesday</h5>
-              <h6 class="card-subtitle mb-2 text-muted">laser rain</h6>
-              <a href="#" class="card-link">UV index</a>
-              <a href="#" class="card-link">Humidity</a>
+            <div class="card card-i shadow p-3 bg-white rounded">
+              <div class="card-body">
+                <h5 class="card-title">Supported by</h5>
+                <a href="#" class="btn btn-dark">Dark Sky</a>
+                <a href="#" class="btn btn-dark">Open Weather</a>
+                <a href="#" class="btn btn-dark">Weather Bit</a>
+                <a href="#" class="btn btn-dark">Location IQ</a>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </main>
 
-          <div class="card" style="width: 18rem; border-radius: 10px;">
-            <div class="card-body">
-              <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather08-512.png" alt="">
-              <h5 class="card-title">wednesday</h5>
-              <h6 class="card-subtitle mb-2 text-muted">thunder!</h6>
-              <a href="#" class="card-link">UV index</a>
-              <a href="#" class="card-link">Humidity</a>
+    <!-- Haekal content -->
+    <div class="container" id="wheather" hidden>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="today" align="center">
+              <h1>Jakarta</h1>
+              <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png" id="mainW" alt="">
+              <h2>Cloudy</h2>
+              <h5>with a chance of meatballs</h5>
             </div>
+  
           </div>
-
-          <div class="card" style="width: 18rem; border-radius: 10px;">
-            <div class="card-body">
-              <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather11-512.png" alt="">
-              <h5 class="card-title">Thursday</h5>
-              <h6 class="card-subtitle mb-2 text-muted">two dots</h6>
-              <a href="#" class="card-link">UV index</a>
-              <a href="#" class="card-link">Humidity</a>
+          <div class="col" id="feed" align="center">
+            <h2></h2>
+  
+            <div class="card card-h" style="width: 18rem; border-radius: 10px;">
+              <div class="card-body">
+                <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png" alt="">
+                <h5 class="card-title">Monday</h5>
+                <h6 class="card-subtitle mb-2 text-muted">hard rain</h6>
+                <a href="#" class="card-link">UV index</a>
+                <a href="#" class="card-link">Humidity</a>
+              </div>
             </div>
-          </div>
-
-          <div class="card" style="width: 18rem; border-radius: 10px;">
-            <div class="card-body">
-              <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather01-512.png" alt="">
-              <h5 class="card-title">Friday</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Sunny</h6>
-              <a href="#" class="card-link">UV index</a>
-              <a href="#" class="card-link">Humidity</a>
+  
+  
+  
+            <div class="card" style="width: 18rem; border-radius: 10px;">
+              <div class="card-body">
+                <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather14-512.png" alt="">
+                <h5 class="card-title">Tuesday</h5>
+                <h6 class="card-subtitle mb-2 text-muted">laser rain</h6>
+                <a href="#" class="card-link">UV index</a>
+                <a href="#" class="card-link">Humidity</a>
+              </div>
+            </div>
+  
+            <div class="card" style="width: 18rem; border-radius: 10px;">
+              <div class="card-body">
+                <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather08-512.png" alt="">
+                <h5 class="card-title">wednesday</h5>
+                <h6 class="card-subtitle mb-2 text-muted">thunder!</h6>
+                <a href="#" class="card-link">UV index</a>
+                <a href="#" class="card-link">Humidity</a>
+              </div>
+            </div>
+  
+            <div class="card" style="width: 18rem; border-radius: 10px;">
+              <div class="card-body">
+                <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather11-512.png" alt="">
+                <h5 class="card-title">Thursday</h5>
+                <h6 class="card-subtitle mb-2 text-muted">two dots</h6>
+                <a href="#" class="card-link">UV index</a>
+                <a href="#" class="card-link">Humidity</a>
+              </div>
+            </div>
+  
+            <div class="card" style="width: 18rem; border-radius: 10px;">
+              <div class="card-body">
+                <img src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather01-512.png" alt="">
+                <h5 class="card-title">Friday</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Sunny</h6>
+                <a href="#" class="card-link">UV index</a>
+                <a href="#" class="card-link">Humidity</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  
-
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-</body>
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>
