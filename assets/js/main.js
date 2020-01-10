@@ -11,7 +11,7 @@ function hidenav() {
     y.style.display = "none";
 
   }
-}   
+}
 
 
 
@@ -25,44 +25,54 @@ function onSignIn(googleUser) {
       google_token
     }
   })
-  .done(dataToken => {
-    console.log(dataToken)
-    $('#wheather2').hide();
-    $('.navbar').show();
-    $('#wheather').show();
-    localStorage.setItem('access_token', dataToken.access_token)
+    .done(dataToken => {
+      // console.log(dataToken)
+      $('#wheather2').hide();
+      $('.navbar').show();
+      $('#wheather').show();
+      localStorage.setItem('access_token', dataToken.access_token)
+      console.log(dataToken.name, '=======')
 
-    $('#wheather').empty()
+      $('#ForUser').append(`
+    <a> ${dataToken.name}</a>
+    `)
+      // $('#wheather').empty()
+      // empty the container
 
-    $.ajax({
-      url: "http://localhost:3000/api/current/jakarta",//straigh from github
-      method: "get"
-  })
-    .done( data =>{
-      let today = data.currentResults
-      let url = ""
-      if(today.weather === "rain"){
-        url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png"
-      }else{
-        url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
-      }
-      $('.today').append(`
-      <h1>${today.city}</h1>
-                <img src="${url}" id="mainW" alt="">
-                <h2>${today.weather}</h2>
-                <h5 class="card-subtitle mb-2 text-muted">${today.description}</h5>
-                <h6>Temprature ${today.temp}</h6>
-                <h6>Wind ${today.wind_speed}</h6>
-                <a href="#" class="card-link">UV index ${today.uv}</a>
-                <a href="#" class="card-link">Humidity ${today.humidity}</a>
+      $.ajax({
+        url: "http://localhost:3000/api/current/jakarta",
+        method: "get"
+      })
+        .done(data => {
+
+
+          let today = data.currentResults
+          let url = ""
+
+          if (today.weather === "Rain") {
+            url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
+          } else if (today.weather === "Clouds") {
+            url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png"
+          } else {
+            url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
+          }
+          $('.today').append(`
+          <h1>${today.city}</h1>
+          <img src="${url}" id="mainW" alt="">
+          <h2>${today.weather}</h2>
+          <h5 class="card-subtitle mb-2 text-muted">${today.summary}</h5>
+          <h6>Temprature ${today.temp}</h6>
+          <h6>Wind ${today.wind_speed}</h6>
+          <a href="#" class="card-link">UV index ${today.uv}</a>
+          <a href="#" class="card-link">Humidity ${today.humidity}</a>
 
   
       `)
-  
-      let week = data.weeklyResults
-  
-      $.each(week, function(index, val){
-        $('#feed').append(`
+
+          let week = data.weeklyResults
+
+          $.each(week, function (index, val) {
+            $('#feed').append(`
         <div class="card card-h" style="width: 18rem; border-radius: 10px;">
         <div class="card-body">
           <img src="${url}" alt="">
@@ -73,42 +83,41 @@ function onSignIn(googleUser) {
         </div>
       </div>
         `)
-      })
+          })
+        })
+        .fail(err => {
+          console.log(err)
+        })
     })
-    .fail (err =>{
-        console.log(err)
+    .fail(err => {
+      console.log(err), 'google sign in';
     })
-    })
-  .fail(err => {
-    console.log(err), 'google sign in';
-  })
 }
 
-$('#kota').on('click', 'button', function(event) {
+$('#kota').on('click', 'button', function (event) {
   // console.log( event.currentTarget.id);
 
   $.ajax({
-      url: `http://localhost:3000/api/current/${event.currentTarget.id}`,
-      method: "get"
+    url: `http://localhost:3000/api/current/${event.currentTarget.id}`,
+    method: "get"
   })
-  .done( data =>{
-    
-    let today = data.currentResults
-    let week = data.weeklyResults
+    .done(data => {
 
-    let url = ""
-    if(today.weather === "rain"){
-      url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png"
-    }else if(today.weather === "clouds"){
-      url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png"
-    }else{
-      url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
-    }
+      let today = data.currentResults
+      let week = data.weeklyResults
 
-    $('#cities').empty()
+      let url = ""
+      if (today.weather === "Rain") {
+        url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
+      } else if (today.weather === "Clouds") {
+        url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather04-512.png"
+      } else {
+        url = "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather07-512.png"
+      }
 
 
-    $('#cities').append(`
+
+      $('#cities').append(`
     <div class="container" style="background-color: #fff; border-radius: 10px; margin-bottom: 60px;" id="weather">
     <div class="container">
       <div class="row">
@@ -119,7 +128,7 @@ $('#kota').on('click', 'button', function(event) {
            <h1 style="margin-top:8px;">${today.city}</h1>
               <img src="${url}" id="mainW" alt="">
               <h2>${today.weather}</h2>
-              <h5 class="card-subtitle mb-2 text-muted">${today.description}</h5>
+              <h5 class="card-subtitle mb-2 text-muted">${today.summary}</h5>
               <h6>Temprature ${today.temp}</h6>
               <h6>Wind ${today.wind_speed}</h6>
               <a href="#" class="card-link">UV index ${today.uv}</a>
@@ -139,8 +148,8 @@ $('#kota').on('click', 'button', function(event) {
 
     `)
 
-    $.each(week, function(index, val){
-      $(`#${today.city}`).append(`
+      $.each(week, function (index, val) {
+        $(`#${today.city}`).append(`
       <div class="card card-h" style="width: 18rem; border-radius: 10px;">
       <div class="card-body">
         <img src="${url}" alt="">
@@ -151,15 +160,15 @@ $('#kota').on('click', 'button', function(event) {
       </div>
     </div>
       `)
-    })
+      })
 
-    
-    
-  
-  })
-  .fail(err =>{
+
+
+
+    })
+    .fail(err => {
       console.log(err)
-  })
+    })
 
 });
 
@@ -178,9 +187,9 @@ function signOut() {
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 
-  $('a').click(function(event){
+  $('a').click(function (event) {
     event.preventDefault()
   })
 
