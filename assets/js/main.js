@@ -1,6 +1,5 @@
 function onSignIn(googleUser) {
   const google_token = googleUser.getAuthResponse().id_token;
-  console.log(google_token);
   $.ajax({
     method: 'POST',
     url: 'http://localhost:3000/user/google-signin',
@@ -9,7 +8,9 @@ function onSignIn(googleUser) {
     }
   })
   .done(data => {
-    console.log(data)
+    $('#wheather2').hide();
+    $('.navbar').show();
+    $('#wheather1').show();
     // localStorage.setItem('access_token', data.access_token)
     // $() tembak yang mau di hide
   })
